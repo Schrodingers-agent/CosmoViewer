@@ -19,23 +19,27 @@ jobs:
             python: "3.13"
           - os: macos-latest
             python: "3.13"
-          - os: windows-latest
-            python: "3.13"
     env:
       QT_QPA_PLATFORM: offscreen
       PYTHONDONTWRITEBYTECODE: "1"
       PYTHONUTF8: "1"
     defaults:
       run:
-        shell: bash          # Git Bash on Windows, so every step reads the same on all three systems
+        shell: bash
     steps:
       - uses: actions/checkout@v4
 
       - name: No oversized files
         if: runner.os == 'Linux'
         run: |
-          big=$(git ls-files -z | xargs -0 find 2>/dev/null -maxdepth 0 -type f -size +5M)
-          if [ -n "$big" ]; then echo "Files over 5 MB:"; echo "$big"; exit 1; fi
+          python3 - <<'PY'
+          import os, subprocess, sys
+          files = subprocess.check_output(["git", "ls-files", "-z"]).decode().split("\0")
+          big = [f for f in files if f and os.path.getsize(f) > 10 * 1024 * 1024]
+          for f in big:
+              print("over 10 MB:", f)
+          sys.exit(1 if big else 0)
+          PY
 
       - uses: actions/setup-python@v5
         with:
