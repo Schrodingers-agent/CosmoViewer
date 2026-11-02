@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# macOS
+.DS_Store
+
+# Archived material: kept on disk, not tracked (backups, merge originals, non-cosmology tools)
+_archive/
+backup_before_sync_*/
+movie_v2_originals/
+
+# Local developer tooling; only the dm_cut test data is tracked
+_dev_tools/*
+!_dev_tools/inspector_check/
+_dev_tools/inspector_check/*
+!_dev_tools/inspector_check/dm_cut/
+
+# Selection sets the app writes next to snapshots
+cosmoviewer_sets/
+
+# Legacy module directory (replaced by cosmo_io_engine/)
+gadgetviewer-1.2.0*/
+
+# LOD cache directories
+.cosmoviewer/
+
+# Local environment and the output of tools/first_run.py
+.venv/
+first_render.png
+first_run.log

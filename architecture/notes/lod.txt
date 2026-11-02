@@ -1,0 +1,24 @@
+lod
+---
+u = splitmix64(id ^ seed) top 24 bits.  same particle same u every snapshot  -> no flicker in movies
+(row-based u: 11% overlap between frames. id-hash: 99%.)
+24 bits ~ 48 usable levels. MAX_LEVEL 80 is decorative.
+
+store: u < cap/N, cap 16M, sorted by leaf cell (128^3) then u
+  first k of a cell = uniform sample of the cell
+  levels nested -> zoom never pops
+  >= 8M particles -> mmap cache, 8GB LRU, ~/.cosmoviewer/lod_cache
+
+f(d) = min(1, f_focus * (D/max(d,D))^2)
+  flat to the focus, 1/d^2 behind. without the falloff a zoom never gets sharp
+  f_focus = finest 2^(-k/2) that fits X
+  leftover budget at full res -> widen, store only
+cells needing f > store fraction -> read from files, only blocks touching the frustum
+
+X = 2M. gadgetviewer default + >1 particle/pixel at 1600x1000.
+
+eagle 850M, mac: 1.46-1.99M drawn all the way down, full res at the focus by 0.004 box.
+mem: 3.5-4GB peak zooming, 1.7-2.2 idle (remeasured. the 0.9 idle was optimistic).
+new set lands: 600ms in the container, <140ms native. colouring-by-property not timed natively.
+
+nothing here is ever measured. float32 on purpose.

@@ -1,0 +1,16 @@
+selections
+----------
+set = ids (uint64 sorted unique) + what it MEANS
+  kind ids|group|region|query, definition, defined_at, complete, n_expected, incomplete_reason
+made on the sample -> complete=False, reason display_sample. forever. hand edits don't launder it.
+v1 files (ids only) -> kind ids, complete unknown.
+
+other snapshot = same particles by id. NOT the definition re-run.
+  "where did these particles go" != "where is the halo now"
+  group 12 at z=0 is not group 12 at z=1. catalogues renumber by size.
+
+lookup: 1M..200M -> id_index (12 B/particle, binary search). else chunked scan. same answers incl. duplicate ids.
+gas->star keeps id. found as PartType4. nice.
+
+file lives in <run>/cosmoviewer_sets/, or ~/.cosmoviewer/sets/<key> when the run is read-only.
+selection_sets.py is the same file in both apps. a test diffs them. keep it that way.

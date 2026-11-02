@@ -1,0 +1,13 @@
+todo / not doing (yet)
+----------------------
+- id index above 200M particles (eagle falls back to scan)
+- W in periodic boxes needs ewald. not faking it.
+- fof > ~8M linking particles on 16GB: out-of-core / domain split linker
+- fof default l on non-g4 runs: read Omega + units from Header/Units, use g4 formula for every link type
+- group numbering past rank 120 (tie order)
+- field histograms ignore the active set. bar says so. follow-the-set later
+- binary reader: fallback, untested lately
+- frame rate on the m3 gpu: never measured
+- new-set pause: time it natively with colour-by-property (default colouring <140ms)
+- fof memory guard says 120 B/particle, measured 128. bump it?
+- velociraptor / binary subfind readers: need test files first

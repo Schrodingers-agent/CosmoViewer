@@ -1,0 +1,13 @@
+units
+-----
+phys = stored * a^a_scaling * h^h_scaling * to_cgs   (eagle: aexp-scale-exponent / h-scale-exponent / CGSConversionFactor)
+comoving?  -> header ComovingIntegrationOn. never a checkbox.
+isolated runs: g4 writes h_scaling=0. Time is code time, not a.
+stored vel w = v_pec/sqrt(a). not a velocity in any frame. convert. always.
+GroupVel = a * v_pec  (= mean(w) * a^1.5). no attrs on catalogue datasets. checked to 1e-6.
+massTable: no attrs -> borrow from another type's Masses in same file, and say so.
+
+g4 Msun 1.989e43 g/1e10  vs IAU: 3e-4 heavier. kpc 3.085678e21: 1.4e-7 longer.
+g4 G 6.6738e-8, H0 3.2407789e-18 h/s. mass budget exact to 5 digits w/ these, off 7.5e-5 w/ astropy.
+"x1000 per Mpc" in a test = fails at 1e-7. don't.
+forget the h -> sizes off by ~1.5 and nothing complains. the whole reason this file exists.

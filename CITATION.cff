@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use CosmoViewer in your work, please cite it as below."
+title: "CosmoViewer: an interactive workbench for cosmological particle simulations"
+type: software
+authors:
+  - family-names: Singh
+    given-names: Arpit Pratap
+version: 1.0.0
+license: GPL-3.0-only
+keywords:
+  - cosmology
+  - N-body simulation
+  - SPH
+  - Gadget-4
+  - HDF5
+  - friends-of-friends
+  - visualisation
+abstract: >-
+  CosmoViewer brings 3D visualisation, structure finding, particle tracking,
+  quantitative analysis and movie making for particle simulations of the
+  universe into one window. It reads single- and multi-file HDF5 snapshots from
+  Gadget and Gadget-style codes, with their group catalogues, and keeps every
+  measurement on the full-resolution particle population rather than the
+  sample drawn on screen.

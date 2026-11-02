@@ -1,0 +1,22 @@
+fof
+---
+l = b * (mbar / rho_link)^(1/3), b=0.2
+rho_link = Om_dm*rho_crit if gas else Om0*rho_crit   (fof.cc, not the box formula)
+dm-only equal mass -> (L^3/N)^(1/3). same thing. good.
+min len 32. number by length desc, 0 = biggest.
+
+grid: cell s <= l/sqrt3  => same cell = linked, free
+join cell pairs nearest offset first, skip if already same root
+crowded pair (>2^18 pair tests) -> ckdtree, else memory goes boom in discs
+exact. same groups as the old linker: 72 linker cases + 8M-particle snaps.
+
+own process. poll rss+swap several x/s, kill at 60% ram. viewer survives.
+DO NOT run on display sample. <d> changes, links change.
+
+dm-l50 z=0: 2774/2774. all three snaps 8030/8032 -> float32 ties at exactly l. fine.
+numbering diverges > rank 120, equal lengths swap. cosmetic.
+
+eagle/agora/gadget2: no Parameters group -> no Omega -> no default l.
+  user types l. docs/fof_linking_length.md
+  zoom-ins: (V/N)^(1/3) is ~8-10x too long, one giant group. that was the agora OOM, probably.
+attach_secondaries exists, not in dialog. not validated. leave it.
